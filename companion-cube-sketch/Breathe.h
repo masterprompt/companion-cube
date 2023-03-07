@@ -4,16 +4,16 @@
 #include "Cube.h"
 #include "Timer.h"
 #include "ColorRange.h"
+#include "Mode.h"
 
-
-class Breathe
+class Breathe : public Mode
 {
     public:
         Timer timer;
         ColorRange colorRange;
         Breathe();
         Setup(Cube *cube);
-        Loop();
+        void Loop() override;
     private:
         Cube * _cube;
 };

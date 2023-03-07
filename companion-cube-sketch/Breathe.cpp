@@ -15,7 +15,8 @@ Breathe::Setup(Cube *cube)
     timer.Reset();
 }
 
-Breathe::Loop()
+void Breathe::Loop()
 {
-    (*_cube).SetColor(colorRange.Interpolate(timer.Loop()));
+    Cube *cube = _cube;
+    (*cube).SetColor(colorRange.Interpolate(timer.Loop()));
 }

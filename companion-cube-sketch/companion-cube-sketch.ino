@@ -9,13 +9,12 @@ Cube cube;
 LEDController ledController;
 Timer timer;
 ColorRange colorRange;
-
 Breathe breathe;
 
 void setup() {
   ledController.Setup();
   cube.AddLEDs(ledController.leds);
-  breathe.Setup(cube);
+  breathe.Setup(&cube);
   Serial.begin(115200);
   timer.Start(7000);
   colorRange.SetColors(CRGB(0,0,0), CRGB(200,0,0));
