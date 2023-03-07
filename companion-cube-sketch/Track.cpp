@@ -1,18 +1,25 @@
 #include "Track.h"
-#include "Arduino.h"
 #include "FastLED.h"
+#include "Arduino.h"
 
 Track::Track()
 {
-
 }
 
-Track::Track(CRGB *ledsPointer)
+Track::AddLEDs(CRGB *ledsPointer)
 {
-    leds = ledsPointer;
+    leds[(int)TrackPosition::CenterPosition] = ledsPointer;
+    leds[(int)TrackPosition::EdgePosition] = ledsPointer + 1;
 }
 
-Track::ValidateLED()
+Track::SetColor(TrackPosition position, CRGB color)
 {
-    Serial.println((long)leds);
+    CRGB *led = leds[(int)position];
+    *led = color;
+}
+
+Track::SetColor(CRGB color)
+{
+    SetColor((int)TrackPosition::CenterPosition, color);
+    SetColor((int)TrackPosition::EdgePosition, color);
 }

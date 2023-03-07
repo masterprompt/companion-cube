@@ -1,17 +1,28 @@
 #ifndef Cube_h
 #define Cube_h
 
-#include "Arduino.h"
 #include "FastLED.h"
 #include "Track.h"
+#include "Face.h"
+
+enum FaceDirection {
+    Top = 0,
+    Front = 1,
+    Right = 2,
+    Left = 3,
+    Bottom = 4,
+    Back = 5
+};
 
 class Cube
 {
     public:
-        CRGB leds[10];
-        Track *track;
+        Face faces[6];
         Cube();
-        ValidateLED();
+        AddLEDs(CRGB * ledsPointer);
+        SetColor(CRGB color);
+        SetColor(FaceDirection faceDirection, CRGB color);
+        Face GetFace(FaceDirection faceDirection);
 };
 
 #endif
