@@ -9,12 +9,12 @@ Cube::Cube()
 
 Cube::AddLEDs(CRGB * ledsPointer)
 {
-    faces[(int)FaceDirection::Top].AddLEDs(ledsPointer);
-    faces[(int)FaceDirection::Front].AddLEDs(ledsPointer + 8);
-    faces[(int)FaceDirection::Right].AddLEDs(ledsPointer + 16);
-    faces[(int)FaceDirection::Left].AddLEDs(ledsPointer + 24);
-    faces[(int)FaceDirection::Bottom].AddLEDs(ledsPointer + 32);
-    faces[(int)FaceDirection::Back].AddLEDs(ledsPointer + 40);
+    faces[(int)FaceDirection::Front].AddLEDs(ledsPointer, 2);
+    faces[(int)FaceDirection::Right].AddLEDs(ledsPointer + 8, 1);
+    faces[(int)FaceDirection::Bottom].AddLEDs(ledsPointer + 16, 0);
+    faces[(int)FaceDirection::Left].AddLEDs(ledsPointer + 24, 3);
+    faces[(int)FaceDirection::Top].AddLEDs(ledsPointer + 32, 2);
+    faces[(int)FaceDirection::Back].AddLEDs(ledsPointer + 40, 0);
 }
 
 Face Cube::GetFace(FaceDirection faceDirection)
@@ -36,4 +36,8 @@ Cube::SetColor(CRGB color)
     SetColor(FaceDirection::Back, color);
 }
 
+Cube::SetColor(FaceDirection faceDirection, CRGB colors[4])
+{
+    GetFace(faceDirection).SetColor(colors);
+}
 

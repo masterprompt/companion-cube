@@ -16,9 +16,10 @@ class Face
     public:
         Track tracks[4];
         Face();
-        AddLEDs(CRGB * ledsPointer);
+        AddLEDs(CRGB * ledsPointer, int pattern);
         SetColor(TrackDirection trackDirection, CRGB color);
         SetColor(CRGB color);
+        SetColor(CRGB colors[4]);
         Track GetTrack(TrackDirection trackDirection);
 };
 

@@ -22,6 +22,7 @@ class Cube
         AddLEDs(CRGB * ledsPointer);
         SetColor(CRGB color);
         SetColor(FaceDirection faceDirection, CRGB color);
+        SetColor(FaceDirection faceDirection, CRGB colors[4]);
         Face GetFace(FaceDirection faceDirection);
 };
 

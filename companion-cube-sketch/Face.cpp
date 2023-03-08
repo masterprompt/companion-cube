@@ -11,12 +11,20 @@ Track Face::GetTrack(TrackDirection trackDirection)
     return tracks[(int)trackDirection];
 }
 
-Face::AddLEDs(CRGB *ledsPointer)
+Face::AddLEDs(CRGB *ledsPointer, int pattern)
 {
-    tracks[(int)TrackDirection::North].AddLEDs(ledsPointer);
-    tracks[(int)TrackDirection::East].AddLEDs(ledsPointer + 2);
-    tracks[(int)TrackDirection::South].AddLEDs(ledsPointer + 4);
-    tracks[(int)TrackDirection::West].AddLEDs(ledsPointer + 6);
+    int maps[][4] = {
+        {North, West, South, East},
+        {East, North, West, South},
+        {South, East, North, West},
+        {West, South, East, North}
+    };
+    for(int i=0; i<4; i++)
+    {
+        int * map = maps[pattern];
+        tracks[map[i]].AddLEDs(ledsPointer + (2 * i));
+    }
+
 }
 
 Face::SetColor(TrackDirection trackDirection, CRGB color)
@@ -32,3 +40,10 @@ Face::SetColor(CRGB color)
     SetColor(TrackDirection::West, color);
 }
 
+Face::SetColor(CRGB colors[4])
+{
+    SetColor(TrackDirection::North, colors[0]);
+    SetColor(TrackDirection::East, colors[1]);
+    SetColor(TrackDirection::South, colors[2]);
+    SetColor(TrackDirection::West, colors[3]);
+}
