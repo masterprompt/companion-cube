@@ -41,3 +41,18 @@ Cube::SetColor(FaceDirection faceDirection, CRGB colors[4])
     GetFace(faceDirection).SetColor(colors);
 }
 
+Cube::SetColor(FaceDirection faceDirection, TrackDirection trackDirection, CRGB color)
+{
+    GetFace(faceDirection).SetColor(trackDirection, color);
+}
+
+Cube::SetColor(TrackDirection trackDirection, CRGB color)
+{
+    SetColor(FaceDirection::Top, trackDirection, color);
+    SetColor(FaceDirection::Front, trackDirection, color);
+    SetColor(FaceDirection::Right, trackDirection, color);
+    SetColor(FaceDirection::Left, trackDirection, color);
+    SetColor(FaceDirection::Bottom, trackDirection, color);
+    SetColor(FaceDirection::Back, trackDirection, color);
+}
+

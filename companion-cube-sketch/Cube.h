@@ -23,6 +23,8 @@ class Cube
         SetColor(CRGB color);
         SetColor(FaceDirection faceDirection, CRGB color);
         SetColor(FaceDirection faceDirection, CRGB colors[4]);
+        SetColor(FaceDirection faceDirection, TrackDirection trackDirection, CRGB color);
+        SetColor(TrackDirection trackDirection, CRGB color);
         Face GetFace(FaceDirection faceDirection);
 };
 
