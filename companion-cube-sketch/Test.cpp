@@ -23,3 +23,8 @@ void Test::Loop()
     (*cube).SetColor(FaceDirection::Left, _colors);
     (*cube).SetColor(FaceDirection::Right, _colors);
 }
+
+void Test::NextConfiguration()
+{
+
+}

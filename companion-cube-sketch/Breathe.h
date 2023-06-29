@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "ColorRange.h"
 #include "Mode.h"
+#include "TwoColorCollection.h"
 
 class Breathe : public Mode
 {
@@ -14,8 +15,10 @@ class Breathe : public Mode
         Breathe();
         Setup(Cube *cube);
         void Loop() override;
+        void NextConfiguration() override;
     private:
         Cube * _cube;
+        TwoColorCollection _colorCollection;
 };
 
 #endif

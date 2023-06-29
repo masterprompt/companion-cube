@@ -6,6 +6,7 @@
 #include "ColorRange.h"
 #include "Mode.h"
 #include "Track.h"
+#include "TwoColorCollection.h"
 
 class Spin : public Mode
 {
@@ -16,6 +17,7 @@ class Spin : public Mode
         Spin();
         Setup(Cube *cube);
         void Loop() override;
+        void NextConfiguration() override;
         void UpdateFaces(TrackDirection trackDirection, unsigned short index, float delta);
     private:
         Cube * _cube;
@@ -23,6 +25,8 @@ class Spin : public Mode
         float _speed;
         signed int _direction;
         float _speedIncrement;
+        TwoColorCollection _colorCollection;
+        void _setupColoring();
 };
 
 #endif

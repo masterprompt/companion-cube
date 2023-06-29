@@ -6,6 +6,13 @@
 #include "Breathe.h"
 #include "Test.h"
 #include "Spin.h"
+#include "Button.h"
+#include "ColorSet.h"
+#include "ModeController.h"
+#include "LinkedList.h"
+#include "LinkedPointerList.h"
+#include "Mode.h"
+#include "TwoColorCollection.h"
 
 Cube cube;
 LEDController ledController;
@@ -14,8 +21,17 @@ ColorRange colorRange;
 Breathe breathe;
 Test test;
 Spin spin;
+Button colorButton;
+Button modeButton;
+ColorSet colorSet;
+ModeController modeController;
+
+const int colorPin = 4;
+const int modePin = 3;
 
 void setup() {
+  colorButton.Setup(colorPin);
+  modeButton.Setup(modePin);
   ledController.Setup();
   cube.AddLEDs(ledController.leds);
   breathe.Setup(&cube);
@@ -24,15 +40,23 @@ void setup() {
   Serial.begin(115200);
   timer.Start(7000);
   colorRange.SetColors(CRGB(0,0,0), CRGB::Red);
+  modeController.AddMode(&breathe);
+  modeController.AddMode(&spin);
+  modeController.AddMode(&test);
 }
 
 void loop() {
-  //CRGB color = CRGB(random(0, 255), random(0, 255), random(0, 255));
-
-  //cube.SetColor(colorRange.Interpolate(timer.Loop()));
-  //test.Loop();
-  breathe.Loop();
-  //spin.Loop();
+  
+  if (colorButton.WasPressed()) {
+    modeController.NextConfiguration();
+  }
+  
+  if (modeButton.WasPressed()) {
+    modeController.Next();
+  }
+  modeController.Loop();
   ledController.Update();
+  modeButton.Loop();
+  colorButton.Loop();
   delay(1);
 }
